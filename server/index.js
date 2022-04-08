@@ -1,0 +1,19 @@
+const express = require("express");
+const app = express();
+const { readFile } = require("fs").promises;
+
+app.use(express.static("../public"));
+// app.use('/public/images', express.static('images'));
+
+app.get("/", async (request, response) => {
+  response.send(await readFile("../public/index.html", "utf8"));
+});
+app.get("/searchCar", async (request, response) => {
+  response.send(await readFile("../public/index.example.html", "utf8"));
+});
+app.get("/car", async (request, response) => {
+  response.send(await readFile("../public/carimobil.html", "utf8"));
+});
+app.listen(process.env.PORT || 3000, () =>
+  console.log(`App available on http://localhost:3000`)
+);
